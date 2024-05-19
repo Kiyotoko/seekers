@@ -6,8 +6,8 @@ on:
       - "master"
 
 jobs:
-  pre-release:
-    name: "Pre Release"
+  pre-release-linux:
+    name: "Pre Release Linux"
     runs-on: "ubuntu-latest"
 
     steps:
@@ -31,6 +31,10 @@ jobs:
           cd ../..
           zip -r seekers.zip *
 
+      - name: "Build binaries"
+        run: |
+          .\freeze.bat
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -39,3 +43,29 @@ jobs:
           title: "Development Build"
           files: |
             seekers.zip
+
+  pre-release-windows:
+    name: "Pre Release Windows"
+    runs-on: "windows-latest"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+
+      - name: "Build binaries"
+        run: |
+          .\freeze.bat
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            seekers.zip
+
