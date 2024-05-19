@@ -1,4 +1,4 @@
+dist
+venv
+*.zip
 *.pyc
-dist/
-venv/
-.idea/
