@@ -33,7 +33,7 @@ jobs:
 
       - name: "Build binaries"
         run: |
-          .\freeze.bat
+          bash freeze.sh
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
