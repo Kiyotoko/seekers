@@ -1,10 +1,3 @@
-@echo off
-echo Setting up virtual environment ...
-python -m venv venv
-
-echo Install requirements ...
-.\venv\Scripts\pip install -r requirements-dev.txt mypy-protobuf
-
 setlocal EnableDelayedExpansion
 
 rem Initialize git submodules
@@ -38,7 +31,7 @@ python -m grpc_tools.protoc ^
    !protoFiles!
 
 rem Invoke protol to fix broken imports
-.\venv\Scripts\protol ^
+protol ^
   --create-package ^
   --in-place ^
   --python-out stubs ^
